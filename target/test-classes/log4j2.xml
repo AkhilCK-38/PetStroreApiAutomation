@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Configuration status="WARN"> 
+
+<Properties>
+	<!-- here u can specify the path where u want to store the file-->
+		<Property name="basePath">./logs</Property>
+	</Properties>
+
+
+  <Appenders>
+	  <!-- this will display the logs in the console itself it will not record-->
+    <Console name="Console" target="SYSTEM_OUT">
+      <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+    </Console>
+    
+    <!-- this will display it in some file-->
+      <RollingFile name="File" fileName="${basePath}/automation.log" filePattern="${basePath}/automation-%d{yyyy-MM-dd}.log">
+     <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+      <SizeBasedTriggeringPolicy size="50000" />
+   </RollingFile>
+    
+    
+  </Appenders>
+  
+  <Loggers>
+    <Root level="Info"><!-- Here you can use multiple log levels All < Trace < Debug < Info < Warn < Error < Fatal < Off -->
+    <!-- here u specify as File than it wll store it in log file , if u specify as Console it will display in console-->
+      <AppenderRef ref="File"/>  <!-- <AppenderRef ref="Console"/> -->
+    </Root>
+  </Loggers>
+  
+</Configuration>
